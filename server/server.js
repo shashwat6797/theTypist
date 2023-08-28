@@ -40,9 +40,9 @@ app.use("/user", userRoute);
 app.use("/test", testRoute);
 
 /*Mongoose Setup*/
-const PORT = process.env.PORT || 5101;
+const PORT = process.env.PORT;
 const connectionSting =
-  process.env.MONGO_URL || "mongodb://127.0.0.1:27017/theTypist";
+  process.env.MONGO_URL;
 
 mongoose
   .connect(connectionSting, {
