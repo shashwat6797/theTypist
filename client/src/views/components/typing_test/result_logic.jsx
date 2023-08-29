@@ -90,7 +90,7 @@ export const calcPracticeKeys = () => {
       practiceKeys.push({ key1: timestamp[i - 1].letter, key2: timestamp[i].letter, diff:diff});
     }
   }
-  console.log(practiceKeys);
+  console.log('practice Key' + practiceKeys);
 };
 
 export const saveResult = () => {

@@ -1,25 +1,32 @@
-// import { words_english } from "../../../../public/words/english.js";
 import axios from "axios";
 
-//Global variables
-var words_english = []
-var wordListLength = 0;
+const getWords = (list) => {
+  let randomLen;
+  let wrd = "";
+  let wrdlist = [];
+  let wi = 0;
 
-const wordList = () => {
-  var wrds = [];
-  axios.defaults.withCredentials = true;
-  axios.get('http://localhost:5101/test/profile').
-  then( res => {
-    wrds = res.practiceKeys;
-  })
+  for (let i = 0; i < 200; i++) {
+    randomLen = Math.ceil(Math.random() * 3);
+    randomLen < 1 ? (randomLen = 1) : randomLen;
+    for (let j = 0; j < randomLen; j++) {
+      if (list[wi] != list[wi + 1]) {
+        wrd = wrd + list[wi] + list[wi + 1];
+      }
+      wi++;
+    }
+    wrdlist.push(wrd);
+    wrd = "";
+  }
+  return wrdlist;
 };
 
 const mapLetter = (lttr) => {
   return <span className="letter">{lttr}</span>;
 };
 
-export const mapWords = () => {
-  const wrdlist = wordList();
+export const mapWords = (list) => {
+  const wrdlist = getWords(list);
   let res = [];
   for (let i = 0; i < 200; i++) {
     res[i] = (
@@ -32,8 +39,8 @@ export const mapWords = () => {
   return res;
 };
 
-export const reMapWord = () => {
-  const wrdlist = wordList();
+export const reMapWord = (list) => {
+  const wrdlist = getWords(list);
   for (let i = 0; i < 200; i++) {
     const el = document.createElement('div');
     el.className = "word";
@@ -47,12 +54,4 @@ export const reMapWord = () => {
   }
 
   return null;
-};
-
-const addClass = (el, name) => {
-  el.className = el.className + " " + name;
-};
-
-export const newGame = () => {
-  addClass(document.querySelector(".word"), "active");
 };

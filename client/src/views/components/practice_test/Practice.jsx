@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import Result from "../typing_test/Result";
 import '../../styles/practice.scss'
 import PracticeTest from "./practice_layout";
@@ -8,6 +8,10 @@ const PracticeGame = () => {
   const showResult = (bool) => {
     setResult(bool);
   }
+
+  useEffect(()=>{
+    console.log('result:'+result);    
+  },[result]);
 
   return <div id="game_container">{result ? <Result /> : <PracticeTest showResult={showResult}/>}</div>;
 };

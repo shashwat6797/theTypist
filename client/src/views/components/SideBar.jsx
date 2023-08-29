@@ -26,11 +26,10 @@ export default function SideBar() {
           <img src="/leaderboard.png" alt="user" />{" "}
           <a href="/leaderboard">LeaderBoard</a>
         </div>
-        <div>
-          {" "}
-          <img src="/stats.png" alt="user" /> <a href="/">Statistics</a>
+        <div className="space">
+          
         </div>
-        <div id="space"> </div>
+        <div className="space"> </div>
         <div>
           {" "}
           <img src="/setting.png" alt="user" /> <a href="/">Settings</a>

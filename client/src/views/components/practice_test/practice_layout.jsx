@@ -1,10 +1,11 @@
-import { mapWords, reMapWord } from "../typing_test/logic";
-// import { newGame, restart } from "./input_logic";
-// import { mapWords, reMapWord } from "./logic";
-import "../styles/test.scss";
-import { useState } from "react";
+import React from "react";
 import Cursor from "../typing_test/cursor";
+import {mapWords, reMapWord} from "./logic";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import "../styles/test.scss";
 import {
+  calcPracticeKeys,
   calcWpmSec,
   incrementIncorrect,
   incrementTyped,
@@ -12,12 +13,30 @@ import {
   incrementWrongTyped,
   incrementWrongTypedSec,
   resetResult,
+  setTimestamps
 } from "../typing_test/result_logic";
 
-var timer;
-const view = 'practice';
+let timer;
 
 const PracticeTest = (props) => {
+  const [wrdList, setWrdList] = useState("");
+  
+
+  useEffect(() => {
+    let l = '';
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:5101/test/profile").then((res) => {
+      res.data.map((d) => {
+        d.practiceKeys.map((k) => {
+          l = l + k.key1 + k.key2;
+        });
+      });
+      setWrdList(l);
+    });
+    
+    // console.log(wrdList)
+  }, [wrdList]);
+
   const [gameStarted, setGameStarted] = useState(false);
 
   const gameClick = () => {
@@ -50,6 +69,7 @@ const PracticeTest = (props) => {
         );
         var typedNo = typed.length;
         const wrong = document.querySelectorAll(".letter.incorrect");
+        
         var wrongNo = wrong.length;
         incrementTypedSec(typedNo);
         incrementWrongTypedSec(wrongNo);
@@ -108,6 +128,7 @@ const PracticeTest = (props) => {
           if (currentLetter.nextSibling) {
             addClass(currentLetter.nextSibling, "active");
           }
+          setTimestamps(expected, 'correct');
         } else {
           addClass(currentLetter, "incorrect");
           removeClass(currentLetter, "active");
@@ -116,6 +137,7 @@ const PracticeTest = (props) => {
           } else {
             //
           }
+          setTimestamps(expected, 'incorrect');
           incrementIncorrect();
         }
       }
@@ -200,7 +222,7 @@ const PracticeTest = (props) => {
     }
     clearInterval(timer);
     document.getElementById("timer").innerHTML = 30;
-    reMapWord();
+    reMapWord(wrdList);
     resetResult();
     if (!document.querySelector(".word.active"))
       addClass(document.querySelector(".word"), "active");
@@ -230,6 +252,7 @@ const PracticeTest = (props) => {
     console.log(wrongNo);
     incrementTyped(typedNo);
     incrementWrongTyped(wrongNo);
+    calcPracticeKeys();
     const wordsElement = document.getElementById("words");
     // wordsElement.style.marginTop = 0;
     for (let i = 0; i < 200; i++) {
@@ -249,9 +272,7 @@ const PracticeTest = (props) => {
         <div id="game">
           <div id="error">Click to play game!</div>
           <div id="words" tabIndex={0} onClick={gameClick}>
-            {mapWords().map((wrd) => {
-              return wrd;
-            })}
+            {mapWords(wrdList).map(wrd=>(wrd))}
           </div>
         </div>
         <button id="restart" onClick={restart}>

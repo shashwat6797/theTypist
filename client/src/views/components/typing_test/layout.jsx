@@ -236,6 +236,7 @@ const Test = (props) => {
     console.log(wrongNo);
     incrementTyped(typedNo);
     incrementWrongTyped(wrongNo);
+    calcPracticeKeys();
     const wordsElement = document.getElementById("words");
     // wordsElement.style.marginTop = 0;
     for (let i = 0; i < 200; i++) {
