@@ -1,10 +1,10 @@
-import { mapWords, reMapWord } from "./logic";
+import { mapWords, reMapWord } from "../typing_test/logic";
 // import { newGame, restart } from "./input_logic";
+// import { mapWords, reMapWord } from "./logic";
 import "../styles/test.scss";
 import { useState } from "react";
-import Cursor from "./cursor";
+import Cursor from "../typing_test/cursor";
 import {
-  calcPracticeKeys,
   calcWpmSec,
   incrementIncorrect,
   incrementTyped,
@@ -12,14 +12,12 @@ import {
   incrementWrongTyped,
   incrementWrongTypedSec,
   resetResult,
-  setTimestamps
-} from "./result_logic";
+} from "../typing_test/result_logic";
 
 var timer;
-const view = 'home';
-var wrdIndex = 0;
+const view = 'practice';
 
-const Test = (props) => {
+const PracticeTest = (props) => {
   const [gameStarted, setGameStarted] = useState(false);
 
   const gameClick = () => {
@@ -52,7 +50,6 @@ const Test = (props) => {
         );
         var typedNo = typed.length;
         const wrong = document.querySelectorAll(".letter.incorrect");
-        
         var wrongNo = wrong.length;
         incrementTypedSec(typedNo);
         incrementWrongTypedSec(wrongNo);
@@ -111,7 +108,6 @@ const Test = (props) => {
           if (currentLetter.nextSibling) {
             addClass(currentLetter.nextSibling, "active");
           }
-          setTimestamps(expected, 'correct');
         } else {
           addClass(currentLetter, "incorrect");
           removeClass(currentLetter, "active");
@@ -120,7 +116,6 @@ const Test = (props) => {
           } else {
             //
           }
-          setTimestamps(expected, 'incorrect');
           incrementIncorrect();
         }
       }
@@ -200,7 +195,6 @@ const Test = (props) => {
   const restart = () => {
     const wordsElement = document.getElementById("words");
     wordsElement.style.marginTop = 0;
-    wrdIndex = 0;
     for (let i = 0; i < 200; i++) {
       wordsElement.lastChild.remove();
     }
@@ -268,4 +262,4 @@ const Test = (props) => {
   );
 };
 
-export default Test;
+export default PracticeTest;

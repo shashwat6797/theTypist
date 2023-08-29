@@ -44,7 +44,7 @@ export const loginUser = async (req, res) => {
 };
 
 export const userHome = (req, res) => {
-  console.log('userHome '+req.session.username);
+  // console.log('userHome '+req.session.username);
   return res.send(req.session.username);
 };
 

@@ -11,12 +11,13 @@
   background-color: rgba(17, 0, 40, 0.05);
   backdrop-filter: blur(60px);
   border-radius: 10px;
-  overflow: hidden;
-  display: grid;
+  display: flex;
+  flex-direction: column;
 
   h1 {
     margin-bottom: 1rem;
     font-weight: 500;
+    height: max-content;
   }
 
   #tableContainer {
@@ -25,6 +26,7 @@
   }
 
   #header {
+    height: fit-content;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     color: rgba(240, 255, 255, 0.268);
@@ -60,13 +62,13 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f13f;
+  background: #f1f1f117;
   border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
+  background: #f1f1f172;
   border-radius: 40px;
   transition: 1s;
 }

@@ -2,16 +2,15 @@ import TestResult from "../models/testResults.js";
 import User from "../models/users.js";
 
 export const addResult = async (req, res) => {
-  console.log(req.body);
-  if (req.body.wpm !== 0) {
+  if (req.body.wpm !== 0 && req.body.practiceKeys !== []) {
     var user = await User.findOne({ username: req.session.username });
     const result = await TestResult.create({
       userId: user.username,
       duration: req.body.time,
       wpm: req.body.wpm,
       acc: req.body.acc,
+      practiceKeys: req.body.practiceKeys
     });
-    console.log(result);
   }
   res.send(req.session.id);
 };

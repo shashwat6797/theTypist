@@ -8,7 +8,8 @@ export default function SideBar() {
       <div id="menu_container">
         <div>
           {" "}
-          <img src="/user.svg" alt="user" /> <a href={`/profile/:${auth.authUser}`}>Profile</a>
+          <img src="/user.svg" alt="user" />{" "}
+          <a href={`/profile/:${auth.authUser}`}>Profile</a>
         </div>
         <div>
           {" "}
@@ -17,11 +18,13 @@ export default function SideBar() {
         </div>
         <div>
           {" "}
-          <img src="/lesson.png" alt="user" /> <a href="/">Practice</a>
+          <img src="/lesson.png" alt="user" />{" "}
+          <a href={`/practice/:${auth.authUser}`}>Practice</a>
         </div>
         <div>
           {" "}
-          <img src="/leaderboard.png" alt="user" /> <a href="/leaderboard">LeaderBoard</a>
+          <img src="/leaderboard.png" alt="user" />{" "}
+          <a href="/leaderboard">LeaderBoard</a>
         </div>
         <div>
           {" "}

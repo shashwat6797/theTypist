@@ -6,6 +6,7 @@ const testResultSchema = new mongoose.Schema({
   duration: { type: Number, required: true },
   wpm: { type: Number, required: true },
   acc: { type: Number, required: true},
+  practiceKeys: {type: Array, required: true},
   dateCreated:{type : Date , default:Date.now}  //date created is automatically added by mongoDB
 });
 
