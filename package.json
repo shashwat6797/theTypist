@@ -1,0 +1,13 @@
+{
+  "name": "thetypist",
+  "version": "1.0.0",
+  "description": "This a side project that I developed that will help me to improve both my typing speed and my MERN stack skills",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
